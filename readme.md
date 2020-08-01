@@ -31,7 +31,7 @@ updates scoreboard in on update.
     docker exec -it docker_kafka-cluster_1  /bin/bash
     ``` 
 1. In `docker_kafka-cluster_1` run following topic creation commands
-    ```
+    ```bash
     root@fast-data-dev / $ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic input-topic
     Created topic input-topic.
     root@fast-data-dev / $ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic intermediate-table-topic --config cleanup.policy=compact
@@ -40,14 +40,23 @@ updates scoreboard in on update.
     Created topic output-topic.
     ```
 1. Start producer
-```
-kafka-console-producer --broker-list localhost:9092 --topic input-topic --property "key.separator=,"
-```
+    ```bash
+    kafka-console-producer --broker-list localhost:9092 --topic input-topic --property "key.separator=,"
+    ```
 1. Start consumer
-```
-
-```
+    ```bash
+    kafka-console-consumer --bootstrap-server localhost:9092 \
+        --topic output-topic \
+        --from-beginning \
+        --formatter kafka.tools.DefaultMessageFormatter \
+        --property print.key=true \
+        --property print.value=true \
+        --property "key.separator=," \
+        --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+        --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+    ```
 1. Start application
-```
-
-```   
+    * TODO
+    ```
+        java -jar app.jar
+    ```   
