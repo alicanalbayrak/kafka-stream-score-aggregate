@@ -11,9 +11,10 @@
     <properties>
         <version.java>1.8</version.java>
         <version.maven.compiler.plugin>3.8.1</version.maven.compiler.plugin>
-        <version.org.apache.kafka>2.5.0</version.org.apache.kafka>
+        <version.org.apache.kafka>2.6.0</version.org.apache.kafka>
         <version.slf4j>1.7.30</version.slf4j>
         <version.junit>4.13</version.junit>
+        <version.assertj.core>3.16.1</version.assertj.core>
     </properties>
 
     <dependencies>
@@ -42,6 +43,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${version.assertj.core}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
